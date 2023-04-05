@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>CASA DE CAMBIO</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+	<h1>CASA DE CAMBIO</h1>
+	<form onsubmit="calcularTotal(); return false;">
+		<label for="monedaOrigen">Selecciona la moneda a cambiar:</label>
+		<select name="monedaOrigen" id="monedaOrigen">
+			<option value="dolar">Dólar</option>
+			<option value="soles">Soles</option>
+			<option value="euros">Euros</option>
+		</select>
+        <p></p>
+		<label for="monedaDestino">Selecciona la moneda a recibir:</label>
+		<select name="monedaDestino" id="monedaDestino">
+			<option value="dolar">Dólar</option>
+			<option value="soles">Soles</option>
+			<option value="euros">Euros</option>
+		</select>
+        <p></p>
+		<input type="submit" value="Calcular total">
+	</form>
+	<script>
+		function calcularTotal() {
+			var monedaOrigen = document.getElementById("monedaOrigen").value;
+			var monedaDestino = document.getElementById("monedaDestino").value;
+			var tasaCambio = 0; 
+			switch (monedaOrigen) {
+				case "dolar":
+					switch (monedaDestino) {
+						case "dolar":
+							tasaCambio = 1;
+							break;
+						case "soles":
+							tasaCambio = 3.5;
+							break;
+						case "euros":
+							tasaCambio = 0.85;
+							break;
+					}
+					break;
+				case "soles":
+					switch (monedaDestino) {
+						case "dolar":
+							tasaCambio = 0.28;
+							break;
+						case "soles":
+							tasaCambio = 1;
+							break;
+						case "euros":
+							tasaCambio = 0.24;
+							break;
+					}
+					break;
+				case "euros":
+					switch (monedaDestino) {
+						case "dolar":
+							tasaCambio = 1.18;
+							break;
+						case "soles":
+							tasaCambio = 4.2;
+							break;
+						case "euros":
+							tasaCambio = 1;
+							break;
+					}
+					break;
+			}
+			var montoOrigen = parseFloat(prompt("Ingresa el monto a cambiar:"));
+			if (!isNaN(montoOrigen)) {
+				var montoDestino = montoOrigen * tasaCambio;
+				alert("Total a recibir: " + montoDestino.toFixed(2) + " " + monedaDestino.toUpperCase());
+			}
+		}
+	</script>
+</body>
+</html>
